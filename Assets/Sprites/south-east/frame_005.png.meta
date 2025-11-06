@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7ff9b89335c1bc54193b986b2efb524e
+guid: 6b077f8af8f0dc8438de09062bf200b5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4499056247913652778
-    second: lina_0
+      213: 6636361135747025162
+    second: frame_005_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lina_0
+      name: frame_005_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1536
-        height: 1024
+        x: 12
+        y: 6
+        width: 15
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a22256902dbdf6e30800000000000000
-      internalID: 4499056247913652778
+      spriteID: a09c861ca47191c50800000000000000
+      internalID: 6636361135747025162
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      lina_0: 4499056247913652778
+      frame_005_0: 6636361135747025162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
