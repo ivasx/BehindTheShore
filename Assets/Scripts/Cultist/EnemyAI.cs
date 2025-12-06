@@ -16,13 +16,16 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float chasingDistance = 4f;
     [SerializeField] private float stopChasingDistance = 10f;
     [SerializeField] private float chasingSpeedMultiplier = 2f;
+    [SerializeField] private float pathUpdateInterval = 0.2f;
     
     [Header("Attacking Settings")]
     [SerializeField] private bool isAttackingEnemy = false;
     [SerializeField] private float attackingDistance = 1.5f;
+    [SerializeField] private float attackingExitBuffer = 0.5f;
     [SerializeField] private float attackRate = 2f;
     
     private float nextAttackTime = 0f;
+    private float nextPathUpdateTime = 0f;
     
     private NavMeshAgent navMeshAgent;
     private State currentState;
@@ -55,6 +58,11 @@ public class EnemyAI : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
+        
+        navMeshAgent.acceleration = 1000f;
+        navMeshAgent.angularSpeed = 3600f;
+        navMeshAgent.stoppingDistance = 0.1f;
+        
         currentState = startingState;
         
         roamingSpeed = navMeshAgent.speed;
@@ -109,8 +117,12 @@ public class EnemyAI : MonoBehaviour
 
     private void ChasingTarget()
     {
-        if (Player.Instance != null) {
+        if (Player.Instance == null) return;
+        
+        if (Time.time >= nextPathUpdateTime)
+        {
             navMeshAgent.SetDestination(Player.Instance.transform.position);
+            nextPathUpdateTime = Time.time + pathUpdateInterval;
         }
     }
 
@@ -148,7 +160,7 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case State.Attacking:
-                if (distanceToPlayer > attackingDistance)
+                if (distanceToPlayer > (attackingDistance + attackingExitBuffer))
                 {
                     newState = State.Chasing;
                 }
@@ -166,6 +178,7 @@ public class EnemyAI : MonoBehaviour
         if (newState == State.Chasing)
         {
             navMeshAgent.speed = chasingSpeed;
+            nextPathUpdateTime = 0f;
         } 
         else if (newState == State.Roaming)
         {
