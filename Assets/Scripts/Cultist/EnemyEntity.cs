@@ -1,41 +1,64 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(PolygonCollider2D))]
 public class EnemyEntity : MonoBehaviour
 {
-    [SerializeField] private int maxHealth;
+    [SerializeField] private int maxHealth = 100;
     private int currentHealth;
 
-    private PolygonCollider2D polygonCollider2D;
+    private PolygonCollider2D attackCollider;
 
     private void Awake()
     {
-        polygonCollider2D = GetComponent<PolygonCollider2D>();
+        attackCollider = GetComponent<PolygonCollider2D>();
+        if (attackCollider == null)
+        {
+            Debug.LogError("PolygonCollider2D не знайдено на " + gameObject.name);
+        }
     }
+    
     private void Start()
     {
         currentHealth = maxHealth;
+        if (attackCollider != null)
+        {
+            attackCollider.enabled = false;
+            attackCollider.isTrigger = true; 
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Attacked");
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Attacked Player!");
+            
+        }
+        else
+        {
+            Debug.Log("Attacked: " + other.gameObject.name);
+        }
     }
     
     public void PolygonCollider2DTurnOff()
     {
-        polygonCollider2D.enabled = false;
+        if (attackCollider != null)
+        {
+            attackCollider.enabled = false;
+        }
     }
 
     public void PolygonCollider2DTurnOn()
     {
-        polygonCollider2D.enabled = true;
+        if (attackCollider != null)
+        {
+            attackCollider.enabled = true;
+        }
     }
     
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Debug.Log(gameObject.name + " отримав " + damage + " пошкоджень. Залишилось HP: " + currentHealth);
         DetectDeath();
     }
 
@@ -43,9 +66,8 @@ public class EnemyEntity : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            Debug.Log(gameObject.name + " помер!");
             Destroy(gameObject);
         }
     }
-
-    
 }

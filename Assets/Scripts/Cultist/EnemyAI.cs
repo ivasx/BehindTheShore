@@ -61,7 +61,7 @@ public class EnemyAI : MonoBehaviour
         
         navMeshAgent.acceleration = 1000f;
         navMeshAgent.angularSpeed = 3600f;
-        navMeshAgent.stoppingDistance = 0.1f;
+        navMeshAgent.stoppingDistance = 0.5f;
         
         currentState = startingState;
         
@@ -72,6 +72,7 @@ public class EnemyAI : MonoBehaviour
     private void Start() 
     {
         startingPosition = transform.position;
+        Roaming();
     }
 
     private void Update()
@@ -86,7 +87,8 @@ public class EnemyAI : MonoBehaviour
         {
             case State.Roaming:
                 roamingTimer -= Time.deltaTime;
-                if (roamingTimer < 0)
+                
+                if (roamingTimer < 0 || HasReachedDestination())
                 {
                     Roaming();
                     roamingTimer = roamingTimerMax;
@@ -115,6 +117,21 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private bool HasReachedDestination()
+    {
+        if (!navMeshAgent.pathPending)
+        {
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private void ChasingTarget()
     {
         if (Player.Instance == null) return;
@@ -135,7 +152,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (Player.Instance == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, Player.Instance.transform.position);
         State newState = currentState;
 
         switch (currentState)
@@ -185,6 +202,7 @@ public class EnemyAI : MonoBehaviour
             roamingTimer = 0f;
             navMeshAgent.speed = roamingSpeed;
             navMeshAgent.ResetPath();
+            Roaming();
         } 
         else if (newState == State.Attacking)
         {
@@ -212,9 +230,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (Time.time > nextCheckDirectionTime)
         {
-            if (IsRunning || currentState == State.Chasing)
+            if (IsRunning || currentState == State.Chasing || currentState == State.Attacking)
             {
-                ChangeFacingDirection(transform.position, navMeshAgent.steeringTarget);
+                Vector3 target = (currentState == State.Roaming) ? navMeshAgent.steeringTarget : 
+                                 (Player.Instance != null ? Player.Instance.transform.position : transform.position);
+                                 
+                ChangeFacingDirection(transform.position, target);
             } 
             
             lastPosition = transform.position;
@@ -231,7 +252,16 @@ public class EnemyAI : MonoBehaviour
 
     private Vector3 GetRoamingPosition()
     {
-        return startingPosition + Utils.GetRandomDir() * UnityEngine.Random.Range(roamingDistanceMin, roamingDistanceMax);
+        Vector3 randomDir = Utils.GetRandomDir() * UnityEngine.Random.Range(roamingDistanceMin, roamingDistanceMax);
+        Vector3 targetPos = startingPosition + randomDir;
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(targetPos, out hit, roamingDistanceMax, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+
+        return transform.position;
     }
 
     private void ChangeFacingDirection(Vector3 sourcePosition, Vector3 targetPosition)
