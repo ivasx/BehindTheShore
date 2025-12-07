@@ -1,24 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+
 
 public class EnemyEntity : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private EnemySO enemySO;
+    
     private int currentHealth;
 
     private PolygonCollider2D attackCollider;
-
+    public event EventHandler OnTakeHit;
     private void Awake()
     {
         attackCollider = GetComponent<PolygonCollider2D>();
         if (attackCollider == null)
         {
-            Debug.LogError("PolygonCollider2D не знайдено на " + gameObject.name);
+            Debug.LogError("PolygonCollider2D not found to " + gameObject.name);
         }
     }
     
     private void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = enemySO.enemyHealth;
         if (attackCollider != null)
         {
             attackCollider.enabled = false;
@@ -26,19 +29,15 @@ public class EnemyEntity : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.transform.TryGetComponent(out Player player))
         {
-            Debug.Log("Attacked Player!");
-            
-        }
-        else
-        {
-            Debug.Log("Attacked: " + other.gameObject.name);
+            player.TakeDamage(transform, enemySO.enemyDamageAmount);
         }
     }
     
+
     public void PolygonCollider2DTurnOff()
     {
         if (attackCollider != null)
@@ -58,7 +57,7 @@ public class EnemyEntity : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(gameObject.name + " отримав " + damage + " пошкоджень. Залишилось HP: " + currentHealth);
+        OnTakeHit?.Invoke(this, System.EventArgs.Empty);
         DetectDeath();
     }
 
@@ -66,7 +65,7 @@ public class EnemyEntity : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Debug.Log(gameObject.name + " помер!");
+            Debug.Log(gameObject.name + " is dead!");
             Destroy(gameObject);
         }
     }

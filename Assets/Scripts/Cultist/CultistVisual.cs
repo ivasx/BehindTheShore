@@ -13,6 +13,7 @@ public class CultistVisual : MonoBehaviour
     private const string IS_RUNNING = "IsRunning";
     private const string CHASING_SPEED_MULTIPLIER = "ChasingSpeedMultiplier";
     private const string ATTACK = "Attack";
+    private const string TAKEHIT = "TakeHit";
     
     
     private void Awake()
@@ -23,6 +24,7 @@ public class CultistVisual : MonoBehaviour
     private void Start()
     {
         enemyAI.OnEnemyAttack += enemyAI_OnEnemyAttack;
+        enemyEntity.OnTakeHit += enemyAI_OnTakeHit;
     }
 
     private void OnDestroy()
@@ -50,5 +52,10 @@ public class CultistVisual : MonoBehaviour
     private void enemyAI_OnEnemyAttack(object sender, System.EventArgs e)
     {
         animator.SetTrigger(ATTACK);
+    }
+    
+    private void enemyAI_OnTakeHit(object sender, System.EventArgs e)
+    {
+        animator.SetTrigger(TAKEHIT);
     }
 }

@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float movingSpeed = 10f;
     private Vector2 inputVector;
     private Rigidbody2D rb;
+    private KnockBack knockBack;
     
     private float minMovingSpeed = 0.1f;
     private bool isRunning = false;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
+        knockBack = GetComponent<KnockBack>();
     }
     
     private void Update()
@@ -26,9 +28,27 @@ public class Player : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if (knockBack.IsGettingKnockedBack)
+            return;
+        
         HandleMovement();
     }
     
+    public bool IsRunning()
+    {
+        return isRunning;
+    }
+    
+    public Vector3 GetPlayerScreenPosition()
+    {
+        Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        return playerScreenPosition;
+    }
+    
+    public void TakeDamage(Transform damageSource, int damage)
+    {
+        knockBack.GetKnockedBack(damageSource);
+    }
     private void HandleMovement()
     {
         
@@ -45,14 +65,5 @@ public class Player : MonoBehaviour
         
     }
     
-    public bool IsRunning()
-    {
-        return isRunning;
-    }
     
-    public Vector3 GetPlayerScreenPosition()
-    {
-        Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        return playerScreenPosition;
-    }
 } 
