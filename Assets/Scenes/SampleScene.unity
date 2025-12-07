@@ -911,8 +911,8 @@ Transform:
   m_GameObject: {fileID: 1523746273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0822, y: 0.4393, z: 0}
-  m_LocalScale: {x: 87.76661, y: 27.143143, z: 100}
+  m_LocalPosition: {x: -0.542, y: 0.4393, z: 0}
+  m_LocalScale: {x: 55.756897, y: 27.143143, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -995,7 +995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678995045170496773, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
       propertyPath: chasingDistance
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5678995045170496773, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
       propertyPath: isAttackingEnemy
@@ -1003,11 +1003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5678995045170496773, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
       propertyPath: stopChasingDistance
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5678995045170496773, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
       propertyPath: chasingSpeedMultiplier
-      value: 5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5908156336395269485, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
       propertyPath: m_Name
@@ -1015,7 +1015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6682659358827505371, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.35
+      value: -18.3
       objectReference: {fileID: 0}
     - target: {fileID: 6682659358827505371, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1060,6 +1060,18 @@ PrefabInstance:
     - target: {fileID: 6716966831989159468, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.102
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906171220307281344, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
+      propertyPath: m_Acceleration
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906171220307281344, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 3600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906171220307281344, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

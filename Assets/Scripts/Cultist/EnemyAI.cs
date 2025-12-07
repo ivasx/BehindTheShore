@@ -197,6 +197,8 @@ public class EnemyAI : MonoBehaviour
 
     private void AttackingTarget()
     {
+        if (Player.Instance == null) return;
+        
         ChangeFacingDirection(transform.position, Player.Instance.transform.position);
 
         if (Time.time > nextAttackTime)
