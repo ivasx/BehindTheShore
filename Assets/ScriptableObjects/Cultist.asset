@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe536f3d9a78934ba1843fa3f59c4ec, type: 3}
   m_Name: Cultist
   m_EditorClassIdentifier: Assembly-CSharp::EnemySO
-  enemyName: 
-  enemyHealth: 0
-  enemyDamageAmount: 0
+  enemyName: Cultist
+  enemyHealth: 10
+  enemyDamageAmount: 5

@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 255992071}
   - component: {fileID: 255992072}
   - component: {fileID: 255992068}
+  - component: {fileID: 255992073}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -386,6 +387,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.7208709, y: 4.151621}
   m_EdgeRadius: 0
+--- !u!114 &255992073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255992065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84cbef41394df55458d3a65bdb2790bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KnockBack
+  knockBackForce: 1
+  knockBackMovingTimerMax: 0.3
 --- !u!1 &456578801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,6 +1223,10 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8793126050662791546, guid: 90c865ff1bfbb7d43af981f9a3e473ba, type: 3}
+      propertyPath: enemySO
+      value: 
+      objectReference: {fileID: 11400000, guid: f41fd40613ef1554f85b49d585af458d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
