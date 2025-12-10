@@ -293,6 +293,7 @@ MonoBehaviour:
   attackingDistance: 0
   attackingExitBuffer: 0.5
   attackRate: 2
+  stopMovingWhenAttacking: 0
 --- !u!114 &8793126050662791546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0efa2c482dec46eb9247e16c2958099f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyEntity
-  enemySO: {fileID: 0}
+  enemySO: {fileID: 11400000, guid: 07299c9763923ec42889b270a6b38a08, type: 2}
+  alwaysEnableCollider: 1
 --- !u!1 &6043069920497551355
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +319,7 @@ GameObject:
   - component: {fileID: 6782017433204019690}
   - component: {fileID: 551057607426217449}
   - component: {fileID: 3620236218981260111}
-  - component: {fileID: 5053215760457572589}
+  - component: {fileID: 5448922366268268053}
   m_Layer: 0
   m_Name: BatVisual
   m_TagString: Untagged
@@ -421,7 +423,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5053215760457572589
+--- !u!114 &5448922366268268053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,8 +432,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6043069920497551355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7e06edb7231a64fa503e34e7953d1c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6274fc9908f1248408f5c8c1797e3694, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CultistVisual
+  m_EditorClassIdentifier: Assembly-CSharp::BatVisual
   enemyAI: {fileID: 5678995045170496773}
   enemyEntity: {fileID: 8793126050662791546}

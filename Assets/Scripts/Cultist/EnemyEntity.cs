@@ -7,8 +7,8 @@ public class EnemyEntity : MonoBehaviour
     [SerializeField] private bool alwaysEnableCollider = false;
     
     private int currentHealth;
-
     private PolygonCollider2D attackCollider;
+    
     public event EventHandler OnTakeHit;
 
     private void Awake()
@@ -25,6 +25,7 @@ public class EnemyEntity : MonoBehaviour
         else
         {
             Debug.LogError("EnemySO not assigned in EnemyEntity on " + gameObject.name);
+            currentHealth = 10;
         }
 
         if (attackCollider != null)
@@ -63,7 +64,8 @@ public class EnemyEntity : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        OnTakeHit?.Invoke(this, System.EventArgs.Empty);
+        OnTakeHit?.Invoke(this, EventArgs.Empty);
+        Debug.Log($"{gameObject.name} took {damage} damage. Health: {currentHealth}");
         DetectDeath();
     }
 
@@ -71,6 +73,7 @@ public class EnemyEntity : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            Debug.Log($"{gameObject.name} died");
             Destroy(gameObject);
         }
     }
