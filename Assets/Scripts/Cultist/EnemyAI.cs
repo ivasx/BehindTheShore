@@ -268,13 +268,18 @@ public class EnemyAI : MonoBehaviour
     {
         if (Mathf.Abs(sourcePosition.x - targetPosition.x) < 0.1f) return;
 
+        Vector3 currentScale = transform.localScale;
+        float absoluteX = Mathf.Abs(currentScale.x);
+        
         if (sourcePosition.x > targetPosition.x)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            currentScale.x = -absoluteX;
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            currentScale.x = absoluteX;
         }
+
+        transform.localScale = currentScale;
     }
 }
