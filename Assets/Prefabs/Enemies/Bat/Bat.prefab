@@ -122,7 +122,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.83903, y: 3.57852, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.26, y: 0.26, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6782017433204019690}
@@ -202,7 +202,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.5
-  m_Speed: 5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -281,16 +281,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   startingState: 1
-  roamingDistanceMax: 7
-  roamingDistanceMin: 3
+  roamingDistanceMax: 15
+  roamingDistanceMin: 5
   roamingTimerMax: 2
-  isChasingEnemy: 0
+  isChasingEnemy: 1
   chasingDistance: 4
   stopChasingDistance: 10
-  chasingSpeedMultiplier: 2
+  chasingSpeedMultiplier: 1.3
   pathUpdateInterval: 0.2
   isAttackingEnemy: 0
-  attackingDistance: 1.5
+  attackingDistance: 0
   attackingExitBuffer: 0.5
   attackRate: 2
 --- !u!114 &8793126050662791546
@@ -387,7 +387,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -579420980, guid: 358c78e0f04c39744b13e8fc21d8ed75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

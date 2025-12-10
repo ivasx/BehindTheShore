@@ -23,6 +23,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float attackingDistance = 1.5f;
     [SerializeField] private float attackingExitBuffer = 0.5f;
     [SerializeField] private float attackRate = 2f;
+    [SerializeField] private bool stopMovingWhenAttacking = false;
     
     private float nextAttackTime = 0f;
     private float nextPathUpdateTime = 0f;
@@ -119,6 +120,8 @@ public class EnemyAI : MonoBehaviour
 
     private bool HasReachedDestination()
     {
+        if (!navMeshAgent.isOnNavMesh) return false;
+
         if (!navMeshAgent.pathPending)
         {
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
@@ -206,8 +209,11 @@ public class EnemyAI : MonoBehaviour
         } 
         else if (newState == State.Attacking)
         {
-            navMeshAgent.ResetPath();
-            navMeshAgent.velocity = Vector3.zero;
+            if (stopMovingWhenAttacking)
+            {
+                navMeshAgent.ResetPath();
+                navMeshAgent.velocity = Vector3.zero;
+            }
         }
         
         currentState = newState;
@@ -218,6 +224,11 @@ public class EnemyAI : MonoBehaviour
         if (Player.Instance == null) return;
         
         ChangeFacingDirection(transform.position, Player.Instance.transform.position);
+
+        if (!stopMovingWhenAttacking)
+        {
+             navMeshAgent.SetDestination(Player.Instance.transform.position);
+        }
 
         if (Time.time > nextAttackTime)
         {
