@@ -6,6 +6,8 @@ public class PlayerVisual : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     
     private const string IS_RUNNING = "IsRunning";
+    private const string MOVE_X = "MoveX";
+    private const string MOVE_Y = "MoveY";
     
     private void Awake()
     {
@@ -15,19 +17,32 @@ public class PlayerVisual : MonoBehaviour
 
     private void Update()
     {
+        Vector2 inputVector = GameInput.Instance.GetMovementVector();
+        
         animator.SetBool(IS_RUNNING, Player.Instance.IsRunning());
+        
+        // Передаємо напрямок руху в аніматор
+        if (inputVector.sqrMagnitude > 0.01f)
+        {
+            animator.SetFloat(MOVE_X, inputVector.x);
+            animator.SetFloat(MOVE_Y, inputVector.y);
+        }
+        
         AdjustPlayerFacingDirection();
     }
     
-    private void AdjustPlayerFacingDirection(){
+    private void AdjustPlayerFacingDirection()
+    {
         Vector3 mousePos = GameInput.Instance.GetMousePosition(); 
         Vector3 playerPosition = Player.Instance.GetPlayerScreenPosition();
 
-        if (mousePos.x < playerPosition.x){
+        if (mousePos.x < playerPosition.x)
+        {
             spriteRenderer.flipX = true;
-        } else {
+        } 
+        else 
+        {
             spriteRenderer.flipX = false;
         }
     }
-
 }
