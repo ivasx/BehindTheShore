@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1987460101129455829}
   - component: {fileID: 6446189592893937993}
-  - component: {fileID: 6525683881921849302}
   m_Layer: 0
   m_Name: Leaves
   m_TagString: Untagged
@@ -91,19 +90,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6525683881921849302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7180410433336462834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifierVolume
-  m_Size: {x: 0.38137144, y: 0.3279261, z: 4}
-  m_Center: {x: 0.002603054, y: 0.14557156, z: 0}
-  m_Area: 1
-  m_AffectedAgents: ffffffff

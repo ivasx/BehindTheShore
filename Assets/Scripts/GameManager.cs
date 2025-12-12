@@ -1,21 +1,20 @@
 using UnityEngine;
-using TMPro; // Для тексту
-using UnityEngine.SceneManagement; // Для перезавантаження сцен
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [Header("Налаштування UI")]
-    [SerializeField] private TextMeshProUGUI scoreText; // Текст лічильника
-    [SerializeField] private GameObject winScreen; // Панель перемоги (Win Screen)
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private GameObject winScreen;
 
-    private int totalCoins;
-    private int collectedCoins;
+    private int totalRunes;
+    private int collectedRunes;
 
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -25,26 +24,23 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Обов'язково запускаємо час, бо після минулої перемоги він міг бути зупинений
         Time.timeScale = 1f;
 
-        // Рахуємо монетки
-        totalCoins = FindObjectsOfType<Coin>().Length;
-        collectedCoins = 0;
-        
+        totalRunes = FindObjectsOfType<RunesClaim>().Length;
+        collectedRunes = 0;
+
         UpdateScoreText();
-        
-        // Ховаємо екран перемоги на старті
-        if (winScreen != null) 
+
+        if (winScreen != null)
             winScreen.SetActive(false);
     }
 
-    public void CoinCollected()
+    public void RuneCollected()
     {
-        collectedCoins++;
+        collectedRunes++;
         UpdateScoreText();
 
-        if (collectedCoins >= totalCoins)
+        if (collectedRunes >= totalRunes)
         {
             WinGame();
         }
@@ -54,34 +50,27 @@ public class GameManager : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = $"Coins: {collectedCoins} / {totalCoins}";
+            scoreText.text = $"Runes: {collectedRunes} / {totalRunes}";
         }
     }
 
     private void WinGame()
     {
-        // Показуємо екран перемоги
         if (winScreen != null)
             winScreen.SetActive(true);
-        
-        // ЗУПИНЯЄМО ГРУ (фізику, рух персонажа)
-        // Оскільки рух персонажа у вас у FixedUpdate, це спрацює ідеально.
-        Time.timeScale = 0f; 
-    }
 
-    // --- ФУНКЦІЇ ДЛЯ КНОПОК ---
+        Time.timeScale = 0f;
+    }
 
     public void RestartLevel()
     {
-        // Перезавантажуємо поточну сцену
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GoToMainMenu()
     {
-        // Завантажуємо сцену меню (переконайтеся, що вона у вас є і додана в Build Settings)
-        // Якщо сцена називається інакше, змініть "MainMenu" на вашу назву
-        Time.timeScale = 1f; // Повертаємо час, щоб меню не зависло
-        SceneManager.LoadScene("MainMenu"); 
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }

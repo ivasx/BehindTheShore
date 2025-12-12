@@ -126,8 +126,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.005532689, y: 0.14172308}
-  m_Size: {x: 0.3723379, y: 0.3267967}
+  m_Offset: {x: 0.020545457, y: -0.027952213}
+  m_Size: {x: 0.13433711, y: 0.08933798}
   m_Direction: 1
 --- !u!114 &6525683881921849302
 MonoBehaviour:
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifierVolume
-  m_Size: {x: 0.38137144, y: 0.3279261, z: 4}
-  m_Center: {x: 0.002603054, y: 0.14557156, z: 0}
+  m_Size: {x: 0.1295224, y: 0.08879249, z: 4}
+  m_Center: {x: 0.021258593, y: -0.028198816, z: 0}
   m_Area: 1
   m_AffectedAgents: ffffffff

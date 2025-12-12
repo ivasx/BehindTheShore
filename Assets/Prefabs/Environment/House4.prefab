@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifierVolume
-  m_Size: {x: 0.46816298, y: 0.34165975, z: 4}
-  m_Center: {x: -0.0019028634, y: 0.15426947, z: 0}
+  m_Size: {x: 1.49, y: 1.05, z: 4}
+  m_Center: {x: -0.05, y: 0.36, z: 0}
   m_Area: 1
   m_AffectedAgents: ffffffff
 --- !u!61 &7236697338373493931
@@ -142,7 +142,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.03644684, y: 0.41155946}
+  m_Offset: {x: -0.04524076, y: 0.41155946}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.53422266, y: 0.105981365}
@@ -152,5 +152,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5474701, y: 1.0249112}
+  m_Size: {x: 1.5223355, y: 1.0249112}
   m_EdgeRadius: 0
